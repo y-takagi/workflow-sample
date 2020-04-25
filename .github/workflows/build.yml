@@ -1,6 +1,6 @@
 name: build
 
-on: push
+on: pull_request
 
 jobs:
   job1:
@@ -8,11 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Set env
-        run: echo ::set-env name=NX_BASE::${{ github.event.before }}
-
-  job2:
-    needs: job1
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - run: echo $NX_BASE
+        run: echo ::set-env name=NX_BASE::${{ github.event.pull_request.base.sha }}
+      - run: echo "$NX_BASE"
+      - run: echo "pull_request"
