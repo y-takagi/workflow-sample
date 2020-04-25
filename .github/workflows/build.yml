@@ -8,6 +8,11 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Set env
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+        run: echo ::set-env name=NX_BASE::${{ github.event.before }}
+
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run echo $NX_BASE
