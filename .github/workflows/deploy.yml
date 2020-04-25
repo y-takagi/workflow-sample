@@ -1,0 +1,15 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set env
+        run: echo ::set-env name=NX_BASE::${{ github.event.before }}
