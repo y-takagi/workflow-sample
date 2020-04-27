@@ -12,4 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Set env
-        run: echo ::set-env name=NX_BASE::${{ github.event.before }}
+        run: |
+          echo "NX_BASE=${{ github.event.before }}"
+          echo BRANCH="${GITHUB_REF##*/}"
