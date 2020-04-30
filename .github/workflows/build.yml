@@ -12,6 +12,8 @@ jobs:
       - run: echo "$NX_BASE"
       - run: echo "pull_request"
       - run: echo "$GITHUB_SHA"
+      - run: echo ${{ github.run_id }}
+      - run: echo ${{ github.run_number }}
       - uses: actions/cache@v1
         id: cache
         with:
@@ -25,3 +27,9 @@ jobs:
           echo ${{ github.sha }} > tmp/test.txt
       - name: output
         run: cat tmp/test.txt
+
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ github.run_id }}
+      - run: echo ${{ github.run_number }}
