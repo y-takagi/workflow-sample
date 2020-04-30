@@ -15,7 +15,7 @@ jobs:
           echo "$GITHUB_SHA"
           echo ${{ github.run_id }}
           echo ${{ github.run_number }}
-          echo ${{ toJson(job) }}
+          echo "${{ toJson(job) }}"
 
   job2:
     runs-on: ubuntu-latest
