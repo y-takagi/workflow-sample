@@ -6,19 +6,15 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Set env
         run: echo ::set-env name=NX_BASE::${{ github.event.pull_request.base.sha }}
       - run: |
           echo "$NX_BASE"
-          echo "pull_request"
           echo "$GITHUB_SHA"
-          echo ${{ github.run_id }}
-          echo ${{ github.run_number }}
-          echo "${GITHUB_HEAD_REF##*/}"
-          echo "${GITHUB_BASE_REF##*/}"
 
   job2:
+    needs: job1
     runs-on: ubuntu-latest
     steps:
       - run: echo ${{ github.run_id }}
