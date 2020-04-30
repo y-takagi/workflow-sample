@@ -1,0 +1,21 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          echo ${{ github.run_id }}
+          echo ${{ github.run_number }}
+          echo "$GITHUB_SHA"
+      - name: Set env
+        run: |
+          echo "NX_BASE=${{ github.event.before }}"
+          echo BRANCH="${GITHUB_REF##*/}"

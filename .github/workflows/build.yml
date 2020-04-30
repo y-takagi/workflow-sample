@@ -1,0 +1,21 @@
+name: build
+
+on: pull_request
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set env
+        run: echo ::set-env name=NX_BASE::${{ github.event.pull_request.base.sha }}
+      - run: |
+          echo "$NX_BASE"
+          echo "$GITHUB_SHA"
+
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ github.run_id }}
+      - run: echo ${{ github.run_number }}
