@@ -12,16 +12,11 @@ jobs:
       - run: echo "$NX_BASE"
       - run: echo "pull_request"
       - run: echo "$GITHUB_SHA"
-      - uses: actions/cache@v1
-        id: cache
-        with:
-          path: tmp
-          key: cache-${{ runner.os }}-${{ github.sha }}
-          restore-keys: cache-${{ runner.os }}-
-      - name: create
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          mkdir tmp
-          echo ${{ github.sha }} > tmp/test.txt
-      - name: output
-        run: cat tmp/test.txt
+      - run: echo ${{ github.run_id }}
+      - run: echo ${{ github.run_number }}
+
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ github.run_id }}
+      - run: echo ${{ github.run_number }}

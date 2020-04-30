@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - run: |
+          echo ${{ github.run_id }}
+          echo ${{ github.run_number }}
       - name: Set env
         run: |
           echo "NX_BASE=${{ github.event.before }}"
