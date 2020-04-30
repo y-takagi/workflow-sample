@@ -11,7 +11,7 @@ jobs:
         run: echo ::set-env name=NX_BASE::${{ github.event.pull_request.base.sha }}
       - run: echo "$NX_BASE"
       - run: echo "pull_request"
-      - run: echo "sha: ${{ github.sha }}"
+      - run: echo "sha: $GITHUB_SHA"
       - uses: actions/cache@v1
         id: cache
         with:
