@@ -15,7 +15,8 @@ jobs:
           echo "$GITHUB_SHA"
           echo ${{ github.run_id }}
           echo ${{ github.run_number }}
-          echo "${{ toJson(job) }}"
+          echo "${GITHUB_HEAD_REF##*/}"
+          echo "${GITHUB_BASE_REF##*/}"
 
   job2:
     runs-on: ubuntu-latest
