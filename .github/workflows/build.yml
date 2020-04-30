@@ -9,6 +9,11 @@ jobs:
       - uses: actions/checkout@v1
       - name: Set env
         run: echo ::set-env name=NX_BASE::${{ github.event.pull_request.base.sha }}
+      - name: Run cache/restore
+        uses: actions/cache@v1
+        with:
+          path: tmp
+          key: v1-${{ runner.os }}-tmp-${NX_BASE}
       - run: |
           echo "$NX_BASE"
           echo "pull_request"
@@ -17,6 +22,8 @@ jobs:
           echo ${{ github.run_number }}
           echo "${GITHUB_HEAD_REF##*/}"
           echo "${GITHUB_BASE_REF##*/}"
+          mkdir -p tmp
+          echo "hello" > tmp/hoge.txt
 
   job2:
     runs-on: ubuntu-latest
