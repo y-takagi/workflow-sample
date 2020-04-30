@@ -13,7 +13,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: tmp
-          key: v1-${{ runner.os }}-tmp-${NX_BASE}
+          key: v1-${{ runner.os }}-tmp-${{ env.NX_BASE }}
       - run: |
           echo "$NX_BASE"
           echo "pull_request"
