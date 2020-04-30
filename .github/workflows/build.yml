@@ -11,3 +11,17 @@ jobs:
         run: echo ::set-env name=NX_BASE::${{ github.event.pull_request.base.sha }}
       - run: echo "$NX_BASE"
       - run: echo "pull_request"
+      - run: echo "sha: ${{ github.sha }}"
+      - uses: actions/cache@v1
+        id: cache
+        with:
+          path: tmp
+          key: cache-${{ runner.os }}-${{ github.sha }}
+          restore-keys: cache-${{ runner.os }}-
+      - name: create
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir tmp
+          echo ${{ github.sha }} > tmp/test.txt
+      - name: output
+        run: cat tmp/test.txt
