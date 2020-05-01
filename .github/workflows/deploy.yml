@@ -11,10 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v1
+        with:
+          path: tmp
+          key: v1-${{ runner.os }}-tmp-${{ github.sha }}
+          restore-keys: v1-${{ runner.os }}-tmp-
+      - run: |
+          if [ -d "tmp/" ]; then
+            cat tmp/hoge.txt
+          fi
       - run: |
           echo ${{ github.run_id }}
           echo ${{ github.run_number }}
           echo "$GITHUB_SHA"
+          mkdir -p tmp
+          echo "$GITHUB_SHA" > tmp/hoge.txt
       - name: Set env
         run: |
           echo "NX_BASE=${{ github.event.before }}"
