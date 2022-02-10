@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Echo
-        run: echo "Chrome: $(which chrome)"
+        run: echo "$(which chrome)"
 
   job2:
     needs: job1
