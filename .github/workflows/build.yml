@@ -6,27 +6,13 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set env
-        run: echo ::set-env name=NX_BASE::${{ github.event.pull_request.base.sha }}
-      - uses: actions/cache@v1
-        with:
-          path: tmptmp
-          key: v1-${{ runner.os }}-tmptmp-${{ github.sha }}
-          restore-keys: v1-${{ runner.os }}-tmptmp-
-      - run: |
-          if [ -d "tmptmp/" ]; then
-            cat tmptmp/hoge.txt
-          fi
-      - run: |
-          echo "$NX_BASE"
-          echo "$GITHUB_SHA"
-          mkdir -p tmptmp
-          echo "$GITHUB_SHA" > tmptmp/hoge.txt
+      - name: Echo
+        run: echo $(which chromium-browser)
 
   job2:
     needs: job1
     runs-on: ubuntu-latest
     steps:
-      - run: echo "$GITHUB_SHA"
+      - name: Echo
+        run: echo "$GITHUB_SHA"
 
