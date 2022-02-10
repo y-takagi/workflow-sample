@@ -7,22 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set env
-        run: echo ::set-env name=NX_BASE::${{ github.event.pull_request.base.sha }}
-      - uses: actions/cache@v1
-        with:
-          path: tmptmp
-          key: v1-${{ runner.os }}-tmptmp-${{ github.sha }}
-          restore-keys: v1-${{ runner.os }}-tmptmp-
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
       - run: |
-          if [ -d "tmptmp/" ]; then
-            cat tmptmp/hoge.txt
-          fi
-      - run: |
-          echo "$NX_BASE"
-          echo "$GITHUB_SHA"
-          mkdir -p tmptmp
-          echo "$GITHUB_SHA" > tmptmp/hoge.txt
+          echo "BASE: ${{ env.NX_BASE }}"
+          echo "HEAD: ${{ env.NX_HEAD }}"
+          echo "Chrome: $(which chrome)"
 
   job2:
     needs: job1
