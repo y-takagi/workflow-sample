@@ -6,13 +6,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        uses: nrwl/nx-set-shas@v2
-      - run: |
-          echo "BASE: ${{ env.NX_BASE }}"
-          echo "HEAD: ${{ env.NX_HEAD }}"
-          echo "Chrome: $(which chrome)"
+      - run: echo "Chrome: $(which chrome)"
 
   job2:
     needs: job1
