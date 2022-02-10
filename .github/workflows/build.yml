@@ -6,11 +6,13 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Chrome: $(which chrome)"
+      - name: Echo
+        run: echo "Chrome: $(which chrome)"
 
   job2:
     needs: job1
     runs-on: ubuntu-latest
     steps:
-      - run: echo "$GITHUB_SHA"
+      - name: Echo
+        run: echo "$GITHUB_SHA"
 
